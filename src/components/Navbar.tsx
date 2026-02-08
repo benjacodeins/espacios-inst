@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 
 const navLinks = [
-  { href: "#servicios", label: "Servicios" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "/", label: "Inicio" },
+  { href: "/nosotros", label: "Nosotros" },
+  { href: "/servicios", label: "Servicios" },
+  { href: "/proyectos", label: "Proyectos" },
+  { href: "/productos", label: "Productos" },
+  { href: "/contacto", label: "Contacto" },
 ];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,11 +26,10 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: "smooth" });
+  // Close mobile menu when route changes
+  useEffect(() => {
     setIsMobileMenuOpen(false);
-  };
+  }, [location]);
 
   return (
     <>
@@ -38,7 +43,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
             {/* Logo con Imagen Circular */}
-            <a href="#" className="flex items-center gap-3 group">
+            <Link to="/" className="flex items-center gap-3 group">
               <div className="w-10 h-10 rounded-full border border-primary/50 flex items-center justify-center group-hover:border-primary transition-colors overflow-hidden">
                 <img
                   src="/espacios.png"
@@ -49,22 +54,27 @@ const Navbar = () => {
               <span className="font-serif text-xl font-semibold text-foreground">
                 Espacios con Alma
               </span>
-            </a>
+            </Link>
 
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <button
+                <Link
                   key={link.href}
-                  onClick={() => scrollToSection(link.href)}
-                  className="text-muted-foreground hover:text-foreground transition-colors link-underline"
+                  to={link.href}
+                  className={`transition-colors link-underline ${location.pathname === link.href
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   {link.label}
-                </button>
+                </Link>
               ))}
-              <Button variant="hero" onClick={() => scrollToSection("#contacto")}>
-                Asesoramiento
-              </Button>
+              <Link to="/contacto">
+                <Button variant="hero">
+                  Asesoramiento
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -91,17 +101,22 @@ const Navbar = () => {
             <div className="container mx-auto px-4">
               <div className="flex flex-col gap-6">
                 {navLinks.map((link) => (
-                  <button
+                  <Link
                     key={link.href}
-                    onClick={() => scrollToSection(link.href)}
-                    className="text-xl font-serif text-foreground py-2 text-left"
+                    to={link.href}
+                    className={`text-xl font-serif py-2 text-left ${location.pathname === link.href
+                      ? "text-primary"
+                      : "text-foreground"
+                      }`}
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 ))}
-                <Button variant="hero" size="lg" onClick={() => scrollToSection("#contacto")}>
-                  Solicitar Asesoramiento
-                </Button>
+                <Link to="/contacto">
+                  <Button variant="hero" size="lg" className="w-full">
+                    Solicitar Asesoramiento
+                  </Button>
+                </Link>
               </div>
             </div>
           </motion.div>

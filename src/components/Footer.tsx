@@ -1,4 +1,5 @@
 import { Leaf, Instagram, MapPin, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const Footer = () => {
@@ -62,6 +63,74 @@ const Footer = () => {
           </a>
         </motion.div>
 
+        {/* Links Section */}
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          {/* Quick Links */}
+          <div>
+            <h4 className="font-serif text-lg font-semibold text-foreground mb-4">Enlaces Rápidos</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
+                  Inicio
+                </Link>
+              </li>
+              <li>
+                <Link to="/nosotros" className="text-muted-foreground hover:text-primary transition-colors">
+                  Nosotros
+                </Link>
+              </li>
+              <li>
+                <Link to="/servicios" className="text-muted-foreground hover:text-primary transition-colors">
+                  Servicios
+                </Link>
+              </li>
+              <li>
+                <Link to="/proyectos" className="text-muted-foreground hover:text-primary transition-colors">
+                  Proyectos
+                </Link>
+              </li>
+              <li>
+                <Link to="/productos" className="text-muted-foreground hover:text-primary transition-colors">
+                  Productos
+                </Link>
+              </li>
+              <li>
+                <Link to="/contacto" className="text-muted-foreground hover:text-primary transition-colors">
+                  Contacto
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="font-serif text-lg font-semibold text-foreground mb-4">Servicios</h4>
+            <ul className="space-y-2 text-muted-foreground">
+              <li>Paisajismo</li>
+              <li>Diseño de Interiores</li>
+              <li>Plantas y Vivero</li>
+              <li>Decoración</li>
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 className="font-serif text-lg font-semibold text-foreground mb-4">Legal</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/privacidad" className="text-muted-foreground hover:text-primary transition-colors">
+                  Política de Privacidad
+                </Link>
+              </li>
+              <li>
+                <Link to="/terminos" className="text-muted-foreground hover:text-primary transition-colors">
+                  Términos y Condiciones
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-border">
           {/* Logo */}
           <div className="flex items-center gap-3">
@@ -81,7 +150,7 @@ const Footer = () => {
           {/* Social Links */}
           <div className="flex items-center gap-4">
             <a
-              href="https://instagram.com/espaciosconalma"
+              href="https://instagram.com/espaciosconalma_ok"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
